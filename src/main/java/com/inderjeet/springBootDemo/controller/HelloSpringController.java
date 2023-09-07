@@ -1,6 +1,7 @@
 package com.inderjeet.springBootDemo.controller;
 
 import com.inderjeet.springBootDemo.model.FormData;
+import com.inderjeet.springBootDemo.service.HelloSpringService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloSpringController {
 
+    private HelloSpringService helloSpringService;
+
+    public HelloSpringController(HelloSpringService helloSpringService){
+        this.helloSpringService = helloSpringService;
+    }
+
     @GetMapping("/getHello")
     public ResponseEntity<String> getHelloWebFlux(){
 
@@ -21,8 +28,8 @@ public class HelloSpringController {
 
     @PostMapping(value = "/saveForm", consumes = "application/json")
     public ResponseEntity<String> saveFormData(@Valid @RequestBody FormData formData){
-
-        return ResponseEntity.ok("Hello "+formData.getFirstName()+" from SpringBoot");
+        String res = helloSpringService.saveFormData(formData);
+        return ResponseEntity.ok(res);
     }
 
 }
