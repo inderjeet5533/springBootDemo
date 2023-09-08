@@ -1,6 +1,8 @@
 package com.inderjeet.springBootDemo.controller;
 
+import com.inderjeet.springBootDemo.entity.FormDataEntity;
 import com.inderjeet.springBootDemo.model.FormData;
+import com.inderjeet.springBootDemo.model.FormDataRes;
 import com.inderjeet.springBootDemo.service.HelloSpringService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloSpringController {
 
-    private HelloSpringService helloSpringService;
+    private final HelloSpringService helloSpringService;
 
     public HelloSpringController(HelloSpringService helloSpringService){
         this.helloSpringService = helloSpringService;
@@ -29,6 +31,12 @@ public class HelloSpringController {
     @PostMapping(value = "/saveForm", consumes = "application/json")
     public ResponseEntity<String> saveFormData(@Valid @RequestBody FormData formData){
         String res = helloSpringService.saveFormData(formData);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping(value = "/getForm", produces = "application/json")
+    public ResponseEntity<FormDataRes> getFormData(){
+        FormDataRes res = helloSpringService.getFormData();
         return ResponseEntity.ok(res);
     }
 

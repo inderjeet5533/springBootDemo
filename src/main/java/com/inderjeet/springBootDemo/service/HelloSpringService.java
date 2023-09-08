@@ -2,6 +2,7 @@ package com.inderjeet.springBootDemo.service;
 
 import com.inderjeet.springBootDemo.entity.FormDataEntity;
 import com.inderjeet.springBootDemo.model.FormData;
+import com.inderjeet.springBootDemo.model.FormDataRes;
 import com.inderjeet.springBootDemo.repository.FormDataRepository;
 import com.inderjeet.springBootDemo.service.helper.HelloSpringServiceHelper;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloSpringService {
 
-    private FormDataRepository formDataRepository;
-    private HelloSpringServiceHelper helloSpringServiceHelper;
+    private final FormDataRepository formDataRepository;
+    private final HelloSpringServiceHelper helloSpringServiceHelper;
 
     public HelloSpringService(FormDataRepository formDataRepository, HelloSpringServiceHelper helloSpringServiceHelper){
         this.formDataRepository = formDataRepository;
@@ -21,6 +22,10 @@ public class HelloSpringService {
         FormDataEntity formDataEntity = helloSpringServiceHelper.formDataObjToEntity(formData);
         FormDataEntity resEntity = formDataRepository.save(formDataEntity);
         return new StringBuilder("Record Successfully Inserted with uniqueID : ").append(resEntity.getFormId()).toString();
+    }
+
+    public FormDataRes getFormData() {
+        return helloSpringServiceHelper.formDataEntityToObj(formDataRepository.findAll());
     }
 
 }
