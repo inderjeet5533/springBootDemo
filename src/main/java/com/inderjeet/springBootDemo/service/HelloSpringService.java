@@ -7,6 +7,8 @@ import com.inderjeet.springBootDemo.repository.FormDataRepository;
 import com.inderjeet.springBootDemo.service.helper.HelloSpringServiceHelper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HelloSpringService {
 
@@ -25,7 +27,8 @@ public class HelloSpringService {
     }
 
     public FormDataRes getFormData() {
-        return helloSpringServiceHelper.formDataEntityToObj(formDataRepository.findAll());
+        List<FormDataEntity> formDataEntityList = formDataRepository.findAll();
+        return helloSpringServiceHelper.formDataEntityToObj(formDataEntityList);
     }
 
 }

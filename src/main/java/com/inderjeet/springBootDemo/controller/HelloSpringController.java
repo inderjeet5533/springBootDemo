@@ -1,6 +1,5 @@
 package com.inderjeet.springBootDemo.controller;
 
-import com.inderjeet.springBootDemo.entity.FormDataEntity;
 import com.inderjeet.springBootDemo.model.FormData;
 import com.inderjeet.springBootDemo.model.FormDataRes;
 import com.inderjeet.springBootDemo.service.HelloSpringService;

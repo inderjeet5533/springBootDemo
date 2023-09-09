@@ -30,6 +30,7 @@ public class HelloSpringServiceHelper {
 
     private FormData getFormData(FormDataEntity e) {
         return FormData.builder()
+                .formId(e.getFormId())
                 .firstName(e.getFirstName())
                 .lastName(e.getLastName())
                 .email(e.getEmail())

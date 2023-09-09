@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FormData {
 
+    private int formId;
     @NotBlank
     private String firstName;
     @NotBlank
