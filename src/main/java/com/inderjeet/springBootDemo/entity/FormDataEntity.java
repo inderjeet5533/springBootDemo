@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class FormDataEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // this is required if form_id AUTO_INCREMENT PRIMARY KEY, without this will throw exception
     @Column(name = "form_id")
     private int formId;
     @Column(name = "first_name")
