@@ -2,6 +2,7 @@ package com.inderjeet.springBootDemo.controller;
 
 import com.inderjeet.springBootDemo.SpringBootDemoApplication;
 import com.inderjeet.springBootDemo.TestHelper;
+import com.inderjeet.springBootDemo.exception.CustomExceptionHandler;
 import com.inderjeet.springBootDemo.exception.model.CustomErrorResponse;
 import com.inderjeet.springBootDemo.model.FormData;
 import com.inderjeet.springBootDemo.model.FormDataRes;
@@ -33,7 +34,9 @@ class HelloSpringControllerTest extends TestHelper {
     void setUp() {
         helloSpringService = Mockito.mock(HelloSpringService.class);
         HelloSpringController helloSpringController = new HelloSpringController(helloSpringService);
-        mvc =  MockMvcBuilders.standaloneSetup(helloSpringController).build();
+        mvc =  MockMvcBuilders.standaloneSetup(helloSpringController)
+                .setControllerAdvice(new CustomExceptionHandler()) //This line is necessary if you want to call your handler in case of exception.
+                .build();
     }
 
     @Test
@@ -107,11 +110,11 @@ class HelloSpringControllerTest extends TestHelper {
                         .andExpect(status().isBadRequest())
                 .andReturn();
 
-//        String content = mvcResult.getResponse().getContentAsString();
-//        CustomErrorResponse errorRes = mapFromJson(content, CustomErrorResponse.class);
-//        assertEquals("Bad Request", errorRes.getDescription());
-//        assertEquals("firstName", errorRes.getErrors().get(0).getName());
-//        assertEquals("must not be blank", errorRes.getErrors().get(0).getMessage());
+        String content = mvcResult.getResponse().getContentAsString();
+        CustomErrorResponse errorRes = mapFromJson(content, CustomErrorResponse.class);
+        assertEquals("Bad Request", errorRes.getDescription());
+        assertEquals("firstName", errorRes.getErrors().get(0).getName());
+        assertEquals("must not be blank", errorRes.getErrors().get(0).getMessage());
 
     }
 

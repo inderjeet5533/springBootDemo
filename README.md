@@ -9,4 +9,4 @@ Login H2 console with credentials present in yml file.
 
 Junit Demo for Controller and service.
 
-negative controller testing in progress
+negative controller testing also added
