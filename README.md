@@ -1,7 +1,7 @@
 # springBootDemo
 Spring Boot Bean Validation.
 
-to call API's add header key: "authorization" and value "test_auth"
+to call endpoints, add header key: "authorization" and value "test_auth"
 
 H2 DB implementation with Spring Data JPA.
 
@@ -24,4 +24,4 @@ under the following situations.
 check GlobalInterceptor and InterceptorConfig class
 no extra dependency required.
 
-to test Interceptor's preHandle remove header key: "authorization"
+to test Interceptor's preHandle, remove header key: "authorization"
