@@ -5,6 +5,7 @@ import com.inderjeet.springBootDemo.model.FormDataRes;
 import com.inderjeet.springBootDemo.service.HelloSpringService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +28,11 @@ public class HelloSpringController {
     @GetMapping("/getHello")
     public ResponseEntity<String> getHello(){
         log.info("getHello called from HelloSpringController");
-        return ResponseEntity.ok("Hello SpringBoot");
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin", "*");
+        responseHeaders.set("Access-Control-Allow-Methods", "GET,HEAD,POST,OPTIONS");
+        responseHeaders.set("Access-Control-Max-Age", "86400");
+        return ResponseEntity.ok().headers(responseHeaders).body("Hello SpringBoot");
     }
 
     @PostMapping(value = "/saveForm", consumes = "application/json")
