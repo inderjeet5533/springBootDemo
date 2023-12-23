@@ -1,3 +1,5 @@
+# run "mvn clean install" to create jar file in target folder
+
 # springBootDemo
 Spring Boot Bean Validation.
 
